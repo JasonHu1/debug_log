@@ -332,30 +332,30 @@ extern void printRemainHeap(const char*functionName,int line,char*a);
 /***       openwrt                                            ***/
 /****************************************************************************/
 enum{
-    LOG_ERROR,
-    LOG_WARNING,
-    LOG_INFO,
-    LOG_DEBUG,
-    LOG_MSGDUMP,
-    LOG_EXCESSIVE,
+    DBG_ERROR,
+    DBG_WARNING,
+    DBG_INFO,
+    DBG_DEBUG,
+    DBG_MSGDUMP,
+    DBG_EXCESSIVE,
 };
 //general simple
-#define vLOG_DEBUG(...)    do{if(g_debug_level>=LOG_DEBUG){ printf(__VA_ARGS__);}}while(0)
-#define vLOG_INFO(...)     do{if(g_debug_level>=LOG_INFO){ printf(__VA_ARGS__);}}while(0)
-#define vLOG_ERR(...)      do{if(g_debug_level>=LOG_ERROR){printf(__VA_ARGS__);}}while(0)
-#define vLOG_WARN(...)     do{if(g_debug_level>=LOG_WARNING){printf(__VA_ARGS__);}}while(0)
+#define vDBG_DEBUG(...)    do{if(g_debug_level>=DBG_DEBUG){ printf(__VA_ARGS__);}}while(0)
+#define vDBG_INFO(...)     do{if(g_debug_level>=DBG_INFO){ printf(__VA_ARGS__);}}while(0)
+#define vDBG_ERR(...)      do{if(g_debug_level>=DBG_ERROR){printf(__VA_ARGS__);}}while(0)
+#define vDBG_WARN(...)     do{if(g_debug_level>=DBG_WARNING){printf(__VA_ARGS__);}}while(0)
 
 //module detailedly
-#define vLOG_APP(level,_fmt_,...)\
+#define vDBG_APP(level,_fmt_,...)\
     do{if(g_debug_level>=level){printf("APP::[%s]<%d>"_fmt_"\n\r",__FUNCTION__,__LINE__,##__VA_ARGS__);}}while(0)
     
-#define vLOG_MODULE1(level,_fmt_,...)\
+#define vDBG_MODULE1(level,_fmt_,...)\
     do{if(g_debug_level>=level){printf("MODULE1::[%s]<%d>"_fmt_"\n\r",__FUNCTION__,__LINE__,##__VA_ARGS__);}}while(0)
     
-#define vLOG_MODULE2(level,_fmt_,...)\
+#define vDBG_MODULE2(level,_fmt_,...)\
     do{if(g_debug_level>=level){printf("MODULE2::[%s]<%d>"_fmt_"\n\r",__FUNCTION__,__LINE__,##__VA_ARGS__);}}while(0)
     
-#define vLOG_MODULE3(level,_fmt_,...)\
+#define vDBG_MODULE3(level,_fmt_,...)\
     do{if(g_debug_level>=level){printf("MODULE3::[%s]<%d>"_fmt_"\n\r",__FUNCTION__,__LINE__,##__VA_ARGS__);}}while(0)
     
 #endif//__DEBUG_LOG_PRINTF_H__
