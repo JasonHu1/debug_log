@@ -339,23 +339,41 @@ enum{
     DBG_MSGDUMP,
     DBG_EXCESSIVE,
 };
+
+#define BASENAME(x)   strrchr(x,'/')?strrchr(x,'/')+1:x
+
+
+
+#define vdbg_printf(_fmt_, ...)\
+    do{\
+        printf("[%s]<%d>"_fmt_"\n\r",__FUNCTION__,__LINE__, ##__VA_ARGS__);\
+    }while(0)
+
+#define DEBUG(format,...) printf(""format"", ##__VA_ARGS__)
+
+//<>module name must three char
+
 //general simple
-#define vDBG_DEBUG(...)    do{if(g_debug_level>=DBG_DEBUG){ printf(__VA_ARGS__);}}while(0)
-#define vDBG_INFO(...)     do{if(g_debug_level>=DBG_INFO){ printf(__VA_ARGS__);}}while(0)
-#define vDBG_ERR(...)      do{if(g_debug_level>=DBG_ERROR){printf(__VA_ARGS__);}}while(0)
-#define vDBG_WARN(...)     do{if(g_debug_level>=DBG_WARNING){printf(__VA_ARGS__);}}while(0)
+#define vDBG_DEBUG(_fmt_,...)    do{if(g_debug_level>=DBG_DEBUG){  printf("< DBG >[%s:%d]%s() "_fmt_,BASENAME(__FILE__),__LINE__,__FUNCTION__,##__VA_ARGS__);printf("\n\r");}}while(0)
+#define vDBG_INFO(_fmt_,...)     do{if(g_debug_level>=DBG_INFO){   printf("< INF >[%s:%d]%s() "_fmt_,BASENAME(__FILE__),__LINE__,__FUNCTION__,##__VA_ARGS__);printf("\n\r");}}while(0)
+#define vDBG_ERR(_fmt_,...)      do{if(g_debug_level>=DBG_ERROR){ printf( "< ERR >[%s:%d]%s() "_fmt_,BASENAME(__FILE__),__LINE__,__FUNCTION__,##__VA_ARGS__);printf("\n\r");}}while(0)
+#define vDBG_WARN(_fmt_,...)     do{if(g_debug_level>=DBG_WARNING){printf("< WAR >[%s:%d]%s() "_fmt_,BASENAME(__FILE__),__LINE__,__FUNCTION__,##__VA_ARGS__);printf("\n\r");}}while(0)
 
 //module detailedly
 #define vDBG_APP(level,_fmt_,...)\
-    do{if(g_debug_level>=level){printf("APP::[%s]<%d>"_fmt_"\n\r",__FUNCTION__,__LINE__,##__VA_ARGS__);}}while(0)
+    do{if(g_debug_level>=level){printf("< APP >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
     
 #define vDBG_MODULE1(level,_fmt_,...)\
-    do{if(g_debug_level>=level){printf("MODULE1::[%s]<%d>"_fmt_"\n\r",__FUNCTION__,__LINE__,##__VA_ARGS__);}}while(0)
+    do{if(g_debug_level>=level){printf("< MODULE1 >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
     
 #define vDBG_MODULE2(level,_fmt_,...)\
-    do{if(g_debug_level>=level){printf("MODULE2::[%s]<%d>"_fmt_"\n\r",__FUNCTION__,__LINE__,##__VA_ARGS__);}}while(0)
+    do{if(g_debug_level>=level){printf("< MODULE2 >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
     
 #define vDBG_MODULE3(level,_fmt_,...)\
-    do{if(g_debug_level>=level){printf("MODULE3::[%s]<%d>"_fmt_"\n\r",__FUNCTION__,__LINE__,##__VA_ARGS__);}}while(0)
+    do{if(g_debug_level>=level){printf("< MODULE3 >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
     
+#define vDBG_SDKCb(level,_fmt_,...)\
+        do{if(g_debug_level>=level){printf("< SDK >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
+        
+
 #endif//__DEBUG_LOG_PRINTF_H__
