@@ -350,6 +350,7 @@ enum{
     }while(0)
 
 #define DEBUG(format,...) printf(""format"", ##__VA_ARGS__)
+#define DEBUG_LOCATE(format,...)    printf("< JasonDbg >[%s:%d]%s() \r\n",__FILE__,__LINE__,__FUNCTION__);
 
 //<>module name must three char
 
