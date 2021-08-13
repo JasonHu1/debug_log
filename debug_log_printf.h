@@ -331,6 +331,24 @@ extern void printRemainHeap(const char*functionName,int line,char*a);
 /****************************************************************************/
 /***       openwrt                                            ***/
 /****************************************************************************/
+#define MODULE_DBG_APP00            0x0001U
+#define MODULE_DBG_MODULE01         0x0002U
+#define MODULE_DBG_MODULE02         0x0004U
+#define MODULE_DBG_MODULE03         0x0008U
+#define MODULE_DBG_SDKCb04          0x0010U
+#define MODULE_DBG_APP05            0x0020U
+#define MODULE_DBG_APP06            0x0040U
+#define MODULE_DBG_APP07            0x0080U
+#define MODULE_DBG_APP08            0x0100U
+#define MODULE_DBG_APP09            0x0200U
+#define MODULE_DBG_APP10            0x0400U
+#define MODULE_DBG_APP11            0x0800U
+#define MODULE_DBG_APP12            0x1000U
+#define MODULE_DBG_APP13            0x2000U
+#define MODULE_DBG_APP14            0x4000U
+#define MODULE_DBG_APP15            0x8000U
+#define MODULE_DBG_ALL				0xFFFFU
+
 enum{
     DBG_ERROR,
     DBG_WARNING,
@@ -362,19 +380,24 @@ enum{
 
 //module detailedly
 #define vDBG_APP(level,_fmt_,...)\
-    do{if(g_debug_level>=level){printf("< APP >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
+    do{if((g_debug_level>=level) && ( (g_debug_module) & MODULE_DBG_APP00 )){\
+		printf("< APP >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
     
 #define vDBG_MODULE1(level,_fmt_,...)\
-    do{if(g_debug_level>=level){printf("< MODULE1 >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
+    do{if((g_debug_level>=level) && ( (g_debug_module) & MODULE_DBG_MODULE01 )){\
+		printf("< MODULE1 >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
     
 #define vDBG_MODULE2(level,_fmt_,...)\
-    do{if(g_debug_level>=level){printf("< MODULE2 >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
+    do{if((g_debug_level>=level) && ( (g_debug_module) & MODULE_DBG_MODULE02 )){\
+		printf("< MODULE2 >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
     
 #define vDBG_MODULE3(level,_fmt_,...)\
-    do{if(g_debug_level>=level){printf("< MODULE3 >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
+    do{if((g_debug_level>=level)&& ( (g_debug_module) & MODULE_DBG_MODULE03 )){\
+		printf("< MODULE3 >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
     
 #define vDBG_SDKCb(level,_fmt_,...)\
-        do{if(g_debug_level>=level){printf("< SDK >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
+        do{if((g_debug_level>=level) && ( (g_debug_module) & MODULE_DBG_SDKCb04 )){\
+			printf("< SDK >[%d]%s() "_fmt_"\n\r",__LINE__,__FUNCTION__,##__VA_ARGS__);}}while(0)
         
 
 #endif//__DEBUG_LOG_PRINTF_H__
