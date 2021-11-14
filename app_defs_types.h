@@ -6,7 +6,7 @@
 
 #define TYPE_VER				"V01.00"
 
-//���������չ
+
 #ifdef _TYPE_EXTERN_
 #define EXT_TYPE	
 #else
@@ -66,6 +66,7 @@ typedef	unsigned char			UINT8;	///<unsigned char
 typedef	signed char             INT8;	///< char
 
 typedef signed   char   		int8;
+typedef signed   char   		int8_t;
 
 typedef	unsigned short			UINT16;	///<unsigned char
 
@@ -121,6 +122,9 @@ typedef Status_t 				ZStatus_t;
 
 typedef ZStatus_t				afStatus_t;
 
-
+#define HI_UINT16(a) ((unsigned char)(((unsigned int)(a) >> 8) & 0xFF))
+#define LO_UINT16(a) ((unsigned char)((unsigned int)(a) & 0xFF))
+#define BUILD_UINT16(loByte, hiByte) \
+          ((short)(((loByte) & 0x00FF) + (((hiByte) & 0x00FF) << 8)))
  
 #endif//__APP_DEFS_TYPE_H_
