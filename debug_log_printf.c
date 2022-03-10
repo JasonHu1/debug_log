@@ -18,7 +18,6 @@
  * GLOBAL VARIABLES
  */
 int g_debug_level= DBG_INFO;
-unsigned int g_debug_module= MODULE_DBG_ALL;
 /*********************************************************************
  * LOCAL VARIABLES
  */
